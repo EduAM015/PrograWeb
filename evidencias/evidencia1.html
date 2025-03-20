@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Bienvenidos!</title>
+    <link rel="stylesheet" href="evidencia1.css">
+</head>
+<body>
+
+    <div class="header">
+        <header>Panaderia Lupita</header>
+    </div>
+
+    <nav class="navegacionPrincipal">
+        <a href="#Inicio">Inicio</a>
+        <a href="#Acercade">Acerca de</a>
+        <a href="#Servicios">Servicios</a>
+        <a href="#Contacto">Contacto</a>
+    </nav>
+
+    <div class="contenido">
+        <section id="Inicio" class="caja">
+            <h2>Inicio</h2>
+
+            <p class="textoContenido">
+            En Panaderia Lupita, nos dedicamos a crear momentos dulces y memorables con cada bocado. Desde el aroma reconfortante del pan recién horneado hasta la exquisitez de nuestros pasteles y galletas, cada producto es una muestra de nuestra pasión por la panadería artesanal.
+            Nuestros panaderos expertos utilizan solo los ingredientes más frescos y naturales, garantizando sabores auténticos y una calidad inigualable. Ya sea que busques un croissant para tu desayuno, un pan rústico para tu cena o un pastel especial para celebrar, en Panaderia Lupita encontrarás lo que necesitas.
+            </p>
+
+            <img class="imagenInicio" src="imagenesEdu/panaderia-portada.jpg" alt="panaderia-portada">
+        </section>
+
+        <section id="Acercade" class="caja">
+            <h2>Acerca de Nosotros</h2>
+
+            <p class="textoContenido">
+            En Panaderia Lupita, creemos que el amor y la dedicación se reflejan en cada producto que sale de nuestro horno. Desde que abrimos nuestras puertas en [año de fundación], nuestro compromiso ha sido ofrecer productos de panadería artesanal, elaborados con los mejores ingredientes y un toque de cariño.
+            </p>
+
+            <p class="textoContenido">
+            Nuestra mision es ser la panadería favorita de nuestra comunidad, ofreciendo productos de alta calidad y un servicio excepcional, mientras fomentamos un sentido de pertenencia y conexión entre nuestros clientes y nuestro equipo.
+            </p>
+
+            <img class="imagenAcercade" src="imagenesEdu/acercade.jpg" alt="">
+        </section>
+
+        <section id="Servicios" class="caja">
+            <h2>Nuestros Servicios</h2>
+            <ul>
+                <li>Panes Artesanales</li>
+                <li>Pasteles y Tartas</li>
+                <li>Galletas y Dulces</li>
+                <li>Opciones sin gluten y veganas</li>
+            </ul>
+
+            <img class="imagenServicios" src="imagenesEdu/servicios.jpg" alt="">
+        </section>
+
+        <form id="Contacto" class="cajaFormulario">
+            <legend>Llena todos los campos para mandarnos un mensaje!</legend>
+
+            <div class="contenedorDatos">
+                <div class="campo">
+
+                    <label>Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre:">
+                    <span class="error" id="errorNombre"></span>
+
+                </div>
+
+                <div class="campo">
+                    
+                    <label>Número telefónico</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Tu Número:">
+                    <span class="error" id="errorTelefono"></span>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" placeholder="Tu Correo:">
+                    <span class="error" id="errorCorreo"></span>
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Mensaje</label>
+
+                    <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje"></textarea>
+                    <span class="error" id="errorMensaje"></span>
+
+                </div>
+            </div>
+
+            <div class="botonEnviar">
+
+                <input class="boton" type="submit" value="Enviar">
+
+            </div>
+        </form>
+    </div> 
+
+    <!-- INICIO DE SCRIPT PARA VALIDACION DEL FORMULARIO -->
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("Contacto").addEventListener("submit", function(event) {
+                event.preventDefault(); 
+
+                let nombre = document.getElementById("nombre").value.trim();
+                let telefono = document.getElementById("telefono").value.trim();
+                let correo = document.getElementById("correo").value.trim();
+                let mensaje = document.getElementById("mensaje").value.trim();
+
+                let errorNombre = document.getElementById("errorNombre");
+                let errorTelefono = document.getElementById("errorTelefono");
+                let errorCorreo = document.getElementById("errorCorreo");
+                let errorMensaje = document.getElementById("errorMensaje");
+
+                
+                errorNombre.textContent = "";
+                errorTelefono.textContent = "";
+                errorCorreo.textContent = "";
+                errorMensaje.textContent = "";
+
+                let esValido = true;
+
+                
+                let regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+                let regexTelefono = /^[0-9]{10}$/;
+                let regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+                if (!regexNombre.test(nombre)) {
+                    errorNombre.textContent = "ingresa un nombre válido.";
+                    esValido = false;
+                }
+                if (!regexTelefono.test(telefono)) {
+                    errorTelefono.textContent = "El número de teléfono debe tener 10 dígitos.";
+                    esValido = false;
+                }
+                if (!regexCorreo.test(correo)) {
+                    errorCorreo.textContent = "ingresa un correo válido.";
+                    esValido = false;
+                }
+                if (mensaje.length < 10) {
+                    errorMensaje.textContent = "El mensaje debe tener al menos 10 caracteres.";
+                    esValido = false;
+                }
+
+                if (esValido) {
+                    alert("¡Formulario enviado!");
+                    document.getElementById("Contacto").reset();
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

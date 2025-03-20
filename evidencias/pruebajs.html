@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Panadería Lupita, pan artesanal y pasteles de calidad.">
+    <title>¡Bienvenidos!</title>
+    <link rel="stylesheet" href="evidencia1.css">
+</head>
+<body>
+
+    <div class="header">
+        <header>Panadería Lupita</header>
+    </div>
+
+    <nav class="navegacionPrincipal">
+        <a href="#Inicio">Inicio</a>
+        <a href="#Acercade">Acerca de</a>
+        <a href="#Servicios">Servicios</a>
+        <a href="#Contacto">Contacto</a>
+    </nav>
+
+    <div class="contenido">
+        <section id="Inicio" class="caja">
+            <h2>Inicio</h2>
+            <p class="textoContenido">
+                En Panadería Lupita, nos dedicamos a crear momentos dulces y memorables con cada bocado.
+            </p>
+            <img class="imagenInicio" src="imagenesEdu/panaderia-portada.jpg" alt="Panadería Lupita">
+        </section>
+
+        <section id="Acercade" class="caja">
+            <h2>Acerca de Nosotros</h2>
+            <p class="textoContenido">
+                Creemos que el amor y la dedicación se reflejan en cada producto que sale de nuestro horno.
+            </p>
+            <img class="imagenAcercade" src="imagenesEdu/acercade.jpg" alt="Nuestra panadería">
+        </section>
+
+        <section id="Servicios" class="caja">
+            <h2>Nuestros Servicios</h2>
+            <ul>
+                <li>Panes Artesanales</li>
+                <li>Pasteles y Tartas</li>
+                <li>Galletas y Dulces</li>
+                <li>Opciones sin gluten y veganas</li>
+            </ul>
+            <img class="imagenServicios" src="imagenesEdu/servicios.jpg" alt="Nuestros productos">
+        </section>
+
+        <form id="Contacto" class="cajaFormulario">
+            <legend>Llena todos los campos para mandarnos un mensaje!</legend>
+
+            <div class="contenedorDatos">
+                <div class="campo">
+                    <label>Nombre</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre:">
+                    <span class="error" id="errorNombre"></span>
+                </div>
+
+                <div class="campo">
+                    <label>Número telefónico</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Tu Número:">
+                    <span class="error" id="errorTelefono"></span>
+                </div>
+
+                <div class="campo">
+                    <label>Correo electrónico</label>
+                    <input type="email" id="correo" name="correo" placeholder="Tu Correo:">
+                    <span class="error" id="errorCorreo"></span>
+                </div>
+
+                <div class="campo">
+                    <label>Mensaje</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje"></textarea>
+                    <span class="error" id="errorMensaje"></span>
+                </div>
+            </div>
+
+            <div class="botonEnviar">
+                <input class="boton" type="submit" value="Enviar">
+            </div>
+        </form>
+    </div> 
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("Contacto").addEventListener("submit", function(event) {
+                event.preventDefault(); // Evita el envío predeterminado
+
+                let nombre = document.getElementById("nombre").value.trim();
+                let telefono = document.getElementById("telefono").value.trim();
+                let correo = document.getElementById("correo").value.trim();
+                let mensaje = document.getElementById("mensaje").value.trim();
+
+                let errorNombre = document.getElementById("errorNombre");
+                let errorTelefono = document.getElementById("errorTelefono");
+                let errorCorreo = document.getElementById("errorCorreo");
+                let errorMensaje = document.getElementById("errorMensaje");
+
+                // Limpiar mensajes de error
+                errorNombre.textContent = "";
+                errorTelefono.textContent = "";
+                errorCorreo.textContent = "";
+                errorMensaje.textContent = "";
+
+                let esValido = true;
+
+                // Expresiones regulares para validación
+                let regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+                let regexTelefono = /^[0-9]{10}$/;
+                let regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+                if (!regexNombre.test(nombre)) {
+                    errorNombre.textContent = "Por favor, ingresa un nombre válido.";
+                    esValido = false;
+                }
+                if (!regexTelefono.test(telefono)) {
+                    errorTelefono.textContent = "El número de teléfono debe tener 10 dígitos.";
+                    esValido = false;
+                }
+                if (!regexCorreo.test(correo)) {
+                    errorCorreo.textContent = "Por favor, ingresa un correo válido.";
+                    esValido = false;
+                }
+                if (mensaje.length < 10) {
+                    errorMensaje.textContent = "El mensaje debe tener al menos 10 caracteres.";
+                    esValido = false;
+                }
+
+                if (esValido) {
+                    alert("¡Formulario enviado con éxito!");
+                    document.getElementById("Contacto").reset(); // Limpia el formulario
+                }
+            });
+
+            // Desplazamiento suave al hacer clic en los enlaces del menú
+            document.querySelectorAll('.navegacionPrincipal a').forEach(enlace => {
+                enlace.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    let seccionDestino = document.querySelector(this.getAttribute("href"));
+                    seccionDestino.scrollIntoView({ behavior: "smooth" });
+                });
+            });
+        });
+    </script>
+
+    <style>
+        .error {
+            color: red;
+            font-size: 14px;
+            display: block;
+            margin-top: 5px;
+        }
+    </style>
+
+</body>
+</html>

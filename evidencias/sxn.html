@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Centro de Ayuda </title>
+    <link rel="stylesheet" href="sxn.css">
+</head>
+<body>
+
+    <header>
+        <h1>Bienvenido al Centro de ayuda</h1>
+    </header>
+
+    <nav>
+        <a href="#home">Inicio</a>
+        <a href="#about">Acerca de</a>
+        <a href="#services">Servicios</a>
+        <a href="#contact">Contacto</a>
+    </nav>
+
+    <div class="content">
+        <section id="home" class="box">
+            <h2>Inicio</h2>
+            <p>Bienvenido al Centro de Ayuda. Aquí encontrarás información sobre mis servicios y más.</p>
+            <img src="imagenesMel/centro.jpg" alt="">
+        </section>
+        
+        <section id="about" class="box">
+            <h2>Acerca de</h2>
+            <p>Soy una operadora con pasión por crear soluciones modernas y funcionales.</p>
+        </section>
+
+        <section id="services" class="box">
+            <h2>Servicios</h2>
+            <ul>
+                <li>Ayuda</li>
+                <li>Desarrollo de aplicaciones web</li>
+                <li>Consultoría tecnológica</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="box">
+            <form id="Contacto" class="cajaFormulario">
+                <legend>Llena todos los campos para mandarnos un mensaje!</legend>
+    
+                <div class="contenedorDatos">
+                    <div class="campo">
+                        <label>Nombre</label>
+                        <input type="text" id="nombre" name="nombre" placeholder="Tu Nombre:">
+                        <span class="error" id="errorNombre"></span>
+                    </div>
+    
+                    <div class="campo">
+                        <label>Número telefónico</label>
+                        <input type="tel" id="telefono" name="telefono" placeholder="Tu Número:">
+                        <span class="error" id="errorTelefono"></span>
+                    </div>
+    
+                    <div class="campo">
+                        <label>Correo electrónico</label>
+                        <input type="email" id="correo" name="correo" placeholder="Tu Correo:">
+                        <span class="error" id="errorCorreo"></span>
+                    </div>
+    
+                    <div class="campo">
+                        <label>Mensaje</label>
+                        <textarea id="mensaje" name="mensaje" placeholder="Tu mensaje"></textarea>
+                        <span class="error" id="errorMensaje"></span>
+                    </div>
+                </div>
+    
+                <div class="botonEnviar">
+                    <input class="boton" type="submit" value="Enviar">
+                </div>
+            </form>
+        </section>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2025 Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById("Contacto").addEventListener("submit", function(event) {
+                event.preventDefault(); 
+
+                let nombre = document.getElementById("nombre").value.trim();
+                let telefono = document.getElementById("telefono").value.trim();
+                let correo = document.getElementById("correo").value.trim();
+                let mensaje = document.getElementById("mensaje").value.trim();
+
+                let errorNombre = document.getElementById("errorNombre");
+                let errorTelefono = document.getElementById("errorTelefono");
+                let errorCorreo = document.getElementById("errorCorreo");
+                let errorMensaje = document.getElementById("errorMensaje");
+
+                
+                errorNombre.textContent = "";
+                errorTelefono.textContent = "";
+                errorCorreo.textContent = "";
+                errorMensaje.textContent = "";
+
+                let esValido = true;
+
+                
+                let regexNombre = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+                let regexTelefono = /^[0-9]{10}$/;
+                let regexCorreo = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+                if (!regexNombre.test(nombre)) {
+                    errorNombre.textContent = "Por favor, ingresa un nombre válido.";
+                    esValido = false;
+                }
+                if (!regexTelefono.test(telefono)) {
+                    errorTelefono.textContent = "El número de teléfono debe tener 10 dígitos.";
+                    esValido = false;
+                }
+                if (!regexCorreo.test(correo)) {
+                    errorCorreo.textContent = "Por favor, ingresa un correo válido.";
+                    esValido = false;
+                }
+                if (mensaje.length < 10) {
+                    errorMensaje.textContent = "El mensaje debe tener al menos 10 caracteres.";
+                    esValido = false;
+                }
+
+                if (esValido) {
+                    alert("¡Formulario enviado con éxito!");
+                    document.getElementById("Contacto").reset(); // Limpia el formulario
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
