@@ -1,0 +1,86 @@
+{% extends 'panaderia/base.html' %}
+{% load static %}
+
+{% block title %}¡Bienvenidos! - Panaderia Lupita{% endblock %}
+
+{% block content %}
+    <section id="Inicio" class="caja">
+        <h2>Inicio</h2>
+
+        <p class="textoContenido">
+        En Panaderia Lupita, nos dedicamos a crear momentos dulces y memorables con cada bocado. Desde el aroma reconfortante del pan recién horneado hasta la exquisitez de nuestros pasteles y galletas, cada producto es una muestra de nuestra pasión por la panadería artesanal.
+        Nuestros panaderos expertos utilizan solo los ingredientes más frescos y naturales, garantizando sabores auténticos y una calidad inigualable. Ya sea que busques un croissant para tu desayuno, un pan rústico para tu cena o un pastel especial para celebrar, en Panaderia Lupita encontrarás lo que necesitas.
+        </p>
+
+        <img class="imagenInicio" src="{% static 'img/panaderia-portada.jpg' %}" alt="panaderia-portada">
+    </section>
+
+    <section id="Acercade" class="caja">
+        <h2>Acerca de Nosotros</h2>
+
+        <p class="textoContenido">
+        En Panaderia Lupita, creemos que el amor y la dedicación se reflejan en cada producto que sale de nuestro horno. Desde que abrimos nuestras puertas en [año de fundación], nuestro compromiso ha sido ofrecer productos de panadería artesanal, elaborados con los mejores ingredientes y un toque de cariño.
+        </p>
+
+        <p class="textoContenido">
+        Nuestra mision es ser la panadería favorita de nuestra comunidad, ofreciendo productos de alta calidad y un servicio excepcional, mientras fomentamos un sentido de pertenencia y conexión entre nuestros clientes y nuestro equipo.
+        </p>
+
+        <img class="imagenAcercade" src="{% static 'img/acercade.jpg' %}" alt="">
+    </section>
+
+    <section id="Servicios" class="caja">
+        <h2>Nuestros Servicios</h2>
+        <ul>
+            <li>Panes Artesanales</li>
+            <li>Pasteles y Tartas</li>
+            <li>Galletas y Dulces</li>
+            <li>Opciones sin gluten y veganas</li>
+        </ul>
+
+        <img class="imagenServicios" src="{% static 'img/servicios.jpg' %}" alt="">
+    </section>
+
+    <form id="Contacto" class="cajaFormulario" method="post">
+        {% csrf_token %}
+        <legend>Llena todos los campos para mandarnos un mensaje!</legend>
+
+        <div class="contenedorDatos">
+            <div class="campo">
+                <label for="{{ form.nombre.id_for_label }}">Nombre</label>
+                {{ form.nombre }}
+                {% if form.nombre.errors %}
+                <span class="error">{{ form.nombre.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.telefono.id_for_label }}">Número telefónico</label>
+                {{ form.telefono }}
+                {% if form.telefono.errors %}
+                <span class="error">{{ form.telefono.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.correo.id_for_label }}">Correo electrónico</label>
+                {{ form.correo }}
+                {% if form.correo.errors %}
+                <span class="error">{{ form.correo.errors.0 }}</span>
+                {% endif %}
+            </div>
+
+            <div class="campo">
+                <label for="{{ form.mensaje.id_for_label }}">Mensaje</label>
+                {{ form.mensaje }}
+                {% if form.mensaje.errors %}
+                <span class="error">{{ form.mensaje.errors.0 }}</span>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="botonEnviar">
+            <input class="boton" type="submit" value="Enviar">
+        </div>
+    </form>
+{% endblock %}
