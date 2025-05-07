@@ -3,7 +3,7 @@ from django.contrib import messages
 from .forms import ContactoForm
 
 def home(request):
-    """Vista principal que muestra la página de inicio y procesa el formulario de contacto."""
+   
     
     if request.method == 'POST':
         form = ContactoForm(request.POST)

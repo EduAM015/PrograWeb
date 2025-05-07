@@ -1,7 +1,7 @@
 from django.db import models
 
 class Contacto(models.Model):
-    """Modelo para almacenar los mensajes de contacto de los clientes."""
+   
     nombre = models.CharField(max_length=100)
     telefono = models.CharField(max_length=15)
     correo = models.EmailField()

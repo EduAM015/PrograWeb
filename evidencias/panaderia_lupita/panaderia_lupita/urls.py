@@ -1,6 +1,4 @@
-"""
-URL configuration for panaderia_lupita project.
-"""
+
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
@@ -8,10 +6,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('panaderia.urls')),  # Incluimos las URLs de nuestra aplicación
+    path('', include('panaderia.urls')),  
 ]
 
-# Configuración para servir archivos estáticos en desarrollo
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
